@@ -223,3 +223,8 @@ CSぶっぱ余りH
 HN: mizdra  
 Twitter: <https://twitter.com/mizdra>  
 Blog: <http://mizdra.hatenablog.com>
+
+
+
+# License
+MIT License
