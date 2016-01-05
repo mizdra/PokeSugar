@@ -15,17 +15,34 @@ v0.0.0
 
 
 ## 仕様
+構文規則はABNFに基づく。
 ```
-* 基本構文
-種族-フォルム!性格?特性@持ち物(技){努力値}[個体値]<オプション>
+* 構文
+element = *VCHAR
+elements = element *("|" element)
 
-** 技, 努力値, 個体値
-(技1|技2|...)
-{努力値1|努力値2|...}
-[個体値1|個体値2|...]
+key = element
+value = (element) / ("'" elements "'")
+map = key ":" value
+maps = map *("|" map)
 
-** オプション
-<オプション1:値1|オプション2:値2|...>
+name-block = element
+form-block = "-" element
+nature-block = "!" element
+ability-block = "?" element
+item-block = "@" element
+move-block = "(" elements ")"
+ev-block = "{" elements "}"
+iv-block = "[" elements "]"
+option-block = "<" maps ">"
+
+single-element-block = form-block / nature-block / ability-block / item-block
+elements-block = move-block / ev-block / iv-block / option-block
+
+sub-block = [SP] (single-element-block / elements-block)
+
+syntax = name-block *sub-block
+
 ```
 
 **例**
