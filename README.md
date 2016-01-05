@@ -72,7 +72,7 @@ poke-sugar           = name-block *sub-block
 種族ブロックは要素のみで構成される。  
 ブロックの前への空白挿入は許容されない。
 ```
-要素
+name-block = element
 ```
 
 **例**
@@ -85,12 +85,20 @@ poke-sugar           = name-block *sub-block
 ### サブブロック (sub-block)
 サブブロックは単要素ブロックまたは要素群ブロックで構成される。  
 ブロックの前への空白挿入は1つまで許容される。
+```
+sub-block = [SP] (single-element-block / elements-block)
+```
 
 #### 単要素ブロック (single-element-block)
 単要素ブロックは識別子と要素で構成される。  
 識別子と要素の間への空白挿入は許容されない。
 ```
-識別子+要素
+form-block           = "-" element
+nature-block         = "!" element
+ability-block        = "?" element
+item-block           = "@" element
+
+single-element-block = form-block / nature-block / ability-block / item-block
 ```
 
 識別子には以下の4つが定義されている。
@@ -115,10 +123,12 @@ poke-sugar           = name-block *sub-block
 要素群ブロックは括弧と要素群で構成される。  
 括弧と要素群の間, また各要素の間への空白挿入は許容されない。
 ```
-左括弧+要素群+右括弧
+move-block     = "(" elements ")"
+ev-block       = "{" elements "}"
+iv-block       = "[" elements "]"
+option-block   = "<" maps ">"
 
-* 要素群
-要素|要素|...
+elements-block = move-block / ev-block / iv-block / option-block
 ```
 
 括弧には以下の4つが定義されている。
@@ -141,6 +151,9 @@ poke-sugar           = name-block *sub-block
 平仮名, カタカナ, 漢字, 英数字, 記号などの印字可能な文字で記述出来る。  
 ただし識別子, 括弧, パイプ, コンマ, シングルクオテーションなど、本仕様で定義されている記号を記述する際は``\``記号でエスケープする必要がある。  
 要素は可読性を意識して一般的に認識されている単語で書き、全角英数字, 全角記号を含めないことが望ましい。
+```
+element = *VCHAR
+```
 
 **例**
 ```
@@ -177,10 +190,12 @@ CSぶっぱ余りH
 オプション括弧とオプション要素群で構成される。  
 オプション要素自体はオプション名, コロン(``:``), オプション値で構成され、各オプション要素はパイプ(``|``)で区切る。
 ```
-<オプション要素群>
+key          = element
+value        = (element) / ("'" elements "'")
+map          = key ":" value
+maps         = map *("|" map)
 
-* オプション要素群
-オプション名1:オプション値1|オプション名2:オプション値2|...
+option-block = "<" maps ">"
 ```
 
 オプション名, オプション値に仕様出来る文字は[要素]の項と同じである。  
