@@ -41,7 +41,7 @@ elements-block       = move-block / ev-block / iv-block / option-block
 
 sub-block            = [SP] (single-element-block / elements-block)
 
-syntax               = name-block *sub-block
+poke-sugar           = name-block *sub-block
 
 ```
 
