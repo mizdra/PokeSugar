@@ -18,30 +18,30 @@ v0.0.0
 構文規則はABNFに基づく。
 ```
 * 構文
-element = *VCHAR
-elements = element *("|" element)
+element              = *VCHAR
+elements             = element *("|" element)
 
-key = element
-value = (element) / ("'" elements "'")
-map = key ":" value
-maps = map *("|" map)
+key                  = element
+value                = (element) / ("'" elements "'")
+map                  = key ":" value
+maps                 = map *("|" map)
 
-name-block = element
-form-block = "-" element
-nature-block = "!" element
-ability-block = "?" element
-item-block = "@" element
-move-block = "(" elements ")"
-ev-block = "{" elements "}"
-iv-block = "[" elements "]"
-option-block = "<" maps ">"
+name-block           = element
+form-block           = "-" element
+nature-block         = "!" element
+ability-block        = "?" element
+item-block           = "@" element
+move-block           = "(" elements ")"
+ev-block             = "{" elements "}"
+iv-block             = "[" elements "]"
+option-block         = "<" maps ">"
 
 single-element-block = form-block / nature-block / ability-block / item-block
-elements-block = move-block / ev-block / iv-block / option-block
+elements-block       = move-block / ev-block / iv-block / option-block
 
-sub-block = [SP] (single-element-block / elements-block)
+sub-block            = [SP] (single-element-block / elements-block)
 
-syntax = name-block *sub-block
+syntax               = name-block *sub-block
 
 ```
 
