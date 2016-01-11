@@ -21,9 +21,8 @@ v0.1.0
 element              = *VCHAR
 elements             = element *("|" element)
 
-inner-block          = "'" elements "'"
 key                  = element
-value                = element / inner-block
+value                = element
 map                  = key ":" value
 maps                 = map *("|" map)
 
@@ -191,9 +190,8 @@ CSぶっぱ余りH
 オプション括弧とオプション要素群で構成される。  
 オプション要素自体はオプション名, コロン``:``, オプション値で構成され、各オプション要素はパイプ``|``で区切る。
 ```
-inner-block  = "'" elements "'"
 key          = element
-value        = element / inner-block
+value        = element
 map          = key ":" value
 maps         = map *("|" map)
 
